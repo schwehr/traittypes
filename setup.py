@@ -11,8 +11,8 @@ name = 'traittypes'
 import sys
 
 v = sys.version_info
-if v[:2] < (3, 5):
-    error = "ERROR: %s requires Python version 3.5 or above." % name
+if v[:2] < (3, 10):
+    error = "ERROR: %s requires Python version 3.10 or above." % name
     print(error, file=sys.stderr)
     sys.exit(1)
 
@@ -52,7 +52,7 @@ setup_args = dict(
     license         = 'BSD',
     platforms       = "Linux, Mac OS X, Windows",
     keywords        = ['Interactive', 'Interpreter', 'Shell', 'Web'],
-    python_requires = ">=3.5",
+    python_requires = ">=3.10",
     classifiers     = [
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
@@ -60,10 +60,11 @@ setup_args = dict(
         'License :: OSI Approved :: BSD License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
+        'Programming Language :: Python :: 3.14',
     ],
 )
 
