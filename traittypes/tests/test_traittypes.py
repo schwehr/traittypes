@@ -1,4 +1,3 @@
-# encoding: utf-8
 """Tests for traittypes.traittypes."""
 
 # Copyright (c) IPython Development Team.

@@ -4,12 +4,12 @@ import warnings
 from traitlets import TraitType, TraitError, Undefined
 from .utils import Sentinel
 
-class _DelayedImportError(object):
+class _DelayedImportError:
     def __init__(self, package_name):
         self.package_name = package_name
 
     def __getattribute__(self, name):
-        package_name = super(_DelayedImportError, self).__getattribute__('package_name')
+        package_name = super().__getattribute__('package_name')
         raise RuntimeError('Missing dependency: %s' % package_name)
 
 try:
@@ -30,7 +30,7 @@ class SciType(TraitType):
     """A base trait type for numpy arrays, pandas dataframes, pandas series, xarray datasets and xarray dataarrays."""
 
     def __init__(self, **kwargs):
-        super(SciType, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.validators = []
 
     def valid(self, *validators):
@@ -91,7 +91,7 @@ class Array(SciType):
         if value is None and not self.allow_none:
             self.error(obj, value)
         if value is None or value is Undefined:
-            return super(Array, self).validate(obj, value)
+            return super().validate(obj, value)
         try:
             r = np.asarray(value, dtype=self.dtype)
             if isinstance(value, np.ndarray) and r is not value:
@@ -103,7 +103,7 @@ class Array(SciType):
             value = r
         except (ValueError, TypeError) as e:
             raise TraitError(e)
-        return super(Array, self).validate(obj, value)
+        return super().validate(obj, value)
 
     def set(self, obj, value):
         new_value = self._validate(obj, value)
@@ -118,7 +118,7 @@ class Array(SciType):
             default_value = np.array(0, dtype=self.dtype)
         elif default_value is not None and default_value is not Undefined:
             default_value = np.asarray(default_value, dtype=self.dtype)
-        super(Array, self).__init__(default_value=default_value, allow_none=allow_none, **kwargs)
+        super().__init__(default_value=default_value, allow_none=allow_none, **kwargs)
 
     def make_dynamic_default(self):
         if self.default_value is None or self.default_value is Undefined:
@@ -139,12 +139,12 @@ class PandasType(SciType):
         if value is None and not self.allow_none:
             self.error(obj, value)
         if value is None or value is Undefined:
-            return super(PandasType, self).validate(obj, value)
+            return super().validate(obj, value)
         try:
             value = self.klass(value)
         except (ValueError, TypeError) as e:
             raise TraitError(e)
-        return super(PandasType, self).validate(obj, value)
+        return super().validate(obj, value)
 
     def set(self, obj, value):
         new_value = self._validate(obj, value)
@@ -169,7 +169,7 @@ class PandasType(SciType):
             default_value = klass(**klass_kwargs)
         elif default_value is not None and default_value is not Undefined:
             default_value = klass(default_value, **klass_kwargs)
-        super(PandasType, self).__init__(default_value=default_value, allow_none=allow_none, **kwargs)
+        super().__init__(default_value=default_value, allow_none=allow_none, **kwargs)
 
     def make_dynamic_default(self):
         if self.default_value is None or self.default_value is Undefined:
@@ -188,7 +188,7 @@ class DataFrame(PandasType):
         if 'klass' not in kwargs and self.klass is None:
             import pandas as pd
             kwargs['klass'] = pd.DataFrame
-        super(DataFrame, self).__init__(
+        super().__init__(
             default_value=default_value, allow_none=allow_none, **kwargs)
         self.tag(dtype=dtype)
 
@@ -206,7 +206,7 @@ class Series(PandasType):
             kwargs['klass'] = pd.Series
         if dtype is None:
             dtype = np.float64
-        super(Series, self).__init__(
+        super().__init__(
             default_value=default_value, allow_none=allow_none, klass_kwargs={"dtype": dtype}, **kwargs)
         self.tag(dtype=dtype)
         self.dtype = dtype
@@ -224,12 +224,12 @@ class XarrayType(SciType):
         if value is None and not self.allow_none:
             self.error(obj, value)
         if value is None or value is Undefined:
-            return super(XarrayType, self).validate(obj, value)
+            return super().validate(obj, value)
         try:
             value = self.klass(value)
         except (ValueError, TypeError) as e:
             raise TraitError(e)
-        return super(XarrayType, self).validate(obj, value)
+        return super().validate(obj, value)
 
     def set(self, obj, value):
         new_value = self._validate(obj, value)
@@ -252,7 +252,7 @@ class XarrayType(SciType):
             default_value = klass()
         elif default_value is not None and default_value is not Undefined:
             default_value = klass(default_value)
-        super(XarrayType, self).__init__(default_value=default_value, allow_none=allow_none, **kwargs)
+        super().__init__(default_value=default_value, allow_none=allow_none, **kwargs)
 
     def make_dynamic_default(self):
         if self.default_value is None or self.default_value is Undefined:
@@ -271,7 +271,7 @@ class Dataset(XarrayType):
         if 'klass' not in kwargs and self.klass is None:
             import xarray as xr
             kwargs['klass'] = xr.Dataset
-        super(Dataset, self).__init__(
+        super().__init__(
             default_value=default_value, allow_none=allow_none, **kwargs)
         self.tag(dtype=dtype)
 
@@ -287,7 +287,7 @@ class DataArray(XarrayType):
         if 'klass' not in kwargs and self.klass is None:
             import xarray as xr
             kwargs['klass'] = xr.DataArray
-        super(DataArray, self).__init__(
+        super().__init__(
             default_value=default_value, allow_none=allow_none, **kwargs)
         self.tag(dtype=dtype)
         self.dtype = dtype

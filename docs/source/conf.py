@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # traittypes documentation build configuration file.
 #
 # NOTE: This file has been edited manually from the auto-generated one from
@@ -57,8 +55,8 @@ if 'dev' in release:
 master_doc = 'index'
 
 # General information about the project.
-project = u'traittypes'
-author = u'The IPython Contributors'
+project = 'traittypes'
+author = 'The IPython Contributors'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -206,8 +204,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'traittypes.tex', u'traittypes Documentation',
-   u'IPython contributors', 'manual'),
+  ('index', 'traittypes.tex', 'traittypes Documentation',
+   'IPython contributors', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -236,8 +234,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'traittypes', u'traittypes Documentation',
-     [u'IPython contributors'], 1)
+    ('index', 'traittypes', 'traittypes Documentation',
+     ['IPython contributors'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -250,8 +248,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'traittypes', u'traittypes Documentation',
-   u'IPython contributors', 'traittypes', 'One line description of project.',
+  ('index', 'traittypes', 'traittypes Documentation',
+   'IPython contributors', 'traittypes', 'One line description of project.',
    'Miscellaneous'),
 ]
 
