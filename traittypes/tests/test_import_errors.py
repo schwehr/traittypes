@@ -1,4 +1,3 @@
-
 import pytest
 
 from ..traittypes import _DelayedImportError
